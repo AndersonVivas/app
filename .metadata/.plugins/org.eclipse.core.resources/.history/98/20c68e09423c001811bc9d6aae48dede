@@ -1,0 +1,5 @@
+function cambiar() {
+	var texto =document.getElementById('input_formEvento:prueba2').value;
+	
+	document.getElementById('input_formEvento:prueba2').value=texto;
+}

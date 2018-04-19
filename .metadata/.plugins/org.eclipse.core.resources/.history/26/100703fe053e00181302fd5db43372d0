@@ -1,0 +1,107 @@
+package codigoqr.model.entities;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.sql.Time;
+import java.util.List;
+
+
+/**
+ * The persistent class for the tblhorarios database table.
+ * 
+ */
+@Entity
+@Table(name="tblhorarios")
+@NamedQuery(name="Tblhorario.findAll", query="SELECT t FROM Tblhorario t")
+public class Tblhorario implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@SequenceGenerator(name="TBLHORARIOS_IDHORARIO_GENERATOR", sequenceName="TBLHORARIOS_ID_HORARIO_SEQ", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="TBLHORARIOS_IDHORARIO_GENERATOR")
+	@Column(name="id_horario")
+	private Integer idHorario;
+
+	private Boolean activo;
+
+	@Column(name="descripcion_hr")
+	private String descripcionHr;
+
+	@Column(name="hora_horario")
+	private Time horaHorario;
+
+	//bi-directional many-to-one association to Tblasistencia
+	@OneToMany(mappedBy="tblhorario")
+	private List<Tblasistencia> tblasistencias;
+
+	//bi-directional many-to-one association to Tbljornada
+	@ManyToOne
+	@JoinColumn(name="id_jornada")
+	private Tbljornada tbljornada;
+
+	public Tblhorario() {
+	}
+
+	public Integer getIdHorario() {
+		return this.idHorario;
+	}
+
+	public void setIdHorario(Integer idHorario) {
+		this.idHorario = idHorario;
+	}
+
+	public Boolean getActivo() {
+		return this.activo;
+	}
+
+	public void setActivo(Boolean activo) {
+		this.activo = activo;
+	}
+
+	public String getDescripcionHr() {
+		return this.descripcionHr;
+	}
+
+	public void setDescripcionHr(String descripcionHr) {
+		this.descripcionHr = descripcionHr;
+	}
+
+	public Time getHoraHorario() {
+		return this.horaHorario;
+	}
+
+	public void setHoraHorario(Time horaHorario) {
+		this.horaHorario = horaHorario;
+	}
+
+	public List<Tblasistencia> getTblasistencias() {
+		return this.tblasistencias;
+	}
+
+	public void setTblasistencias(List<Tblasistencia> tblasistencias) {
+		this.tblasistencias = tblasistencias;
+	}
+
+	public Tblasistencia addTblasistencia(Tblasistencia tblasistencia) {
+		getTblasistencias().add(tblasistencia);
+		tblasistencia.setTblhorario(this);
+
+		return tblasistencia;
+	}
+
+	public Tblasistencia removeTblasistencia(Tblasistencia tblasistencia) {
+		getTblasistencias().remove(tblasistencia);
+		tblasistencia.setTblhorario(null);
+
+		return tblasistencia;
+	}
+
+	public Tbljornada getTbljornada() {
+		return this.tbljornada;
+	}
+
+	public void setTbljornada(Tbljornada tbljornada) {
+		this.tbljornada = tbljornada;
+	}
+
+}

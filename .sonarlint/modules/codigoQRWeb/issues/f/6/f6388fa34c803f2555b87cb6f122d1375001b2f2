@@ -1,0 +1,39 @@
+
+ƒsquid:S2226"XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(ÏØ²ÈøÿÿÿÿH–RMAJORZBUG
+ƒsquid:S2226""XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(è ˆûÿÿÿÿHœRMAJORZBUG
+Ysquid:S1989D"$Add a "try/catch" block for "doGet".(®Ó‘ûÿÿÿÿÿH“RMINORZVULNERABILITY
+€squid:S00117‰"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Áú©H§RMINORZ
+CODE_SMELL
+squid:S00100G"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ûµä¨ûÿÿÿÿH¢RMINORZ
+CODE_SMELL
+ƒsquid:S2226"XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(©˜‚ÇúÿÿÿÿH—RMAJORZBUG
+gsquid:S1161-":Add the "@Override" annotation above this method signature(÷¤‹úHªRMAJORZ
+CODE_SMELL
+ƒsquid:S2226"XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(ùæ˜›úÿÿÿÿH˜RMAJORZBUG
+Ysquid:S1989D"$Add a "try/catch" block for "doGet".(®Ó‘ûÿÿÿÿÿH”RMINORZVULNERABILITY
+ysquid:S00112G"FDefine and throw a dedicated exception instead of using a generic one.(ûµä¨ûÿÿÿÿH¥RMAJORZ
+CODE_SMELL
+e
+squid:S106I"9Replace this use of System.out or System.err by a logger.(±øÍŸH•RMAJORZ
+CODE_SMELL
+Wsquid:S19890"'Add a "try/catch" block for "parseInt".(Ô½òH’RMINORZVULNERABILITY
+}squid:S00100…"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(»ú¡‘H£RMINORZ
+CODE_SMELL
+csquid:S1135*"2Complete the task associated to this TODO comment.(ƒŠ® úÿÿÿÿHŸRINFOZ
+CODE_SMELL
+ƒsquid:S2226!"XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(éİÈøÿÿÿÿH›RMAJORZBUG
+lsquid:S1161A":Add the "@Override" annotation above this method signature(ş³‚”ûÿÿÿÿH«RMAJORZ
+CODE_SMELL
+~squid:S2226 "XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(Ÿ¡ÀùHšRMAJORZBUG
+~squid:S2226$"XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(¤ªÅŒHRMAJORZBUG
+~squid:S2226"XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(´ö–€H™RMAJORZBUG
+~squid:S2226#"XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(Ş¡ HRMAJORZBUG
+¸%squid:RedundantThrowsDeclarationCheckG"lRemove the declaration of thrown exception 'java.lang.Exception', as it cannot be thrown from method's body.(ûµä¨ûÿÿÿÿH‘RMINORZ
+CODE_SMELL
+csquid:S1135<"2Complete the task associated to this TODO comment.(ÕÌ®şÿÿÿÿH RINFOZ
+CODE_SMELL
+}squid:S00100‰"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Áú©H¤RMINORZ
+CODE_SMELL
+Xsquid:S1148="#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿH©RMINORZVULNERABILITY
+squid:S00116#"bRename this field "fechaNacimiento_usuario" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ş¡ H¦RMINORZ
+CODE_SMELL

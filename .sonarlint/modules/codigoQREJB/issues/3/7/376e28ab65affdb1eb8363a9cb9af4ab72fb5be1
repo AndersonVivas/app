@@ -1,0 +1,11 @@
+
+|squid:S00100l"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(»ú¡‘HÀ?RMINORZ
+CODE_SMELL
+|squid:S00100p"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Áú©H¾?RMINORZ
+CODE_SMELL
+squid:S00116'"bRename this field "fechaNacimiento_usuario" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ş¡ H¿?RMINORZ
+CODE_SMELL
+½squid:S1186A"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(’í¤üùÿÿÿÿ8ÆÕªëª,HÁ?RCRITICALZ
+CODE_SMELL
+squid:S00117p"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Áú©H½?RMINORZ
+CODE_SMELL

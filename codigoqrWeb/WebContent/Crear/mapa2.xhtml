@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:m="http://code.google.com/p/gmaps4jsf/">
+
+<h:head>
+
+</h:head>
+<body>
+	<ui:composition template="/Resource/Masters/MasterAdmin.xhtml">
+		<ui:define name="principal">
+
+			<h:form styleClass="formnormal" id="mapa">
+				<b:inputText id="autocomplete" placeholder="ingrese direccion"
+					onFocus="geolocate()"></b:inputText>
+			</h:form>
+
+			<table id="address">
+				<tr>
+					<td class="label">Street address</td>
+					<td class="slimField"><input class="field" id="street_number"
+						disabled="true"></input></td>
+					<td class="wideField" colspan="2"><input class="field"
+						id="route" disabled="true"></input></td>
+				</tr>
+				<tr>
+					<td class="label">City</td>
+					<!-- Note: Selection of address components in this example is typical.
+             You may need to adjust it for the locations relevant to your app. See
+             https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform
+        -->
+					<td class="wideField" colspan="3"><input class="field"
+						id="locality" disabled="true"></input></td>
+				</tr>
+				<tr>
+					<td class="label">State</td>
+					<td class="slimField"><input class="field"
+						id="administrative_area_level_1" disabled="true"></input></td>
+					<td class="label">Zip code</td>
+					<td class="wideField"><input class="field" id="postal_code"
+						disabled="true"></input></td>
+				</tr>
+				<tr>
+					<td class="label">Country</td>
+					<td class="wideField" colspan="3"><input class="field"
+						id="country" disabled="true"></input></td>
+				</tr>
+			</table>
+			
+			<b:inputText id="texto1" onkeyup="cambiar()"></b:inputText>
+			<b:inputText id="texto2" ></b:inputText>
+			
+			<b:selectMultiMenu></b:selectMultiMenu>
+		</ui:define>
+		<ui:define name="js">
+			<script type="text/javascript" src="../Resource/js/mapa.js"></script>
+			<script type="text/javascript" src="../Resource/js/ejemplo.js"></script>
+			<script
+				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBReOhtkHkZPdOqYIan2P0mQzlGsEBuASw&amp;libraries=places&amp;callback=initAutocomplete"></script>
+
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

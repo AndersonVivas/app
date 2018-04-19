@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+servers/SonarCloud%2Ftgc-utn/auth=true
+servers/SonarCloud%2Ftgc-utn/notificationsEnabled=true
+servers/SonarCloud%2Ftgc-utn/org=tgc-utn
+servers/SonarCloud%2Ftgc-utn/url=https\://sonarcloud.io

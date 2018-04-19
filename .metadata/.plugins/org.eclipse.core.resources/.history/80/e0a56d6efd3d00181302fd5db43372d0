@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:m="http://code.google.com/p/gmaps4jsf/">
+<h:head>
+	<title>Gestionar Evento</title>
+
+</h:head>
+<h:body>
+	<ui:composition template="/Resource/Masters/MasterAdmin.xhtml">
+		<ui:define name="principal">
+			<b:column col-lg="10">
+				<div>
+					<div>
+						<h:outputText value="#{beanEvento.nombreEvento}"
+							style="font-size: xx-large;" />
+					</div>
+					<div style="padding-left: 10%; padding-right: 20%">
+						<h:outputText value="#{beanEvento.descripcionEvnt}" escape="false" />
+					</div>
+				</div>
+			</b:column>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

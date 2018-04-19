@@ -1,0 +1,659 @@
+package codigoqr.view.bean;
+
+import java.io.IOException;
+import java.util.Date;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
+
+import codigoqr.model.entities.Tblasistencia;
+import codigoqr.model.entities.Tblevento;
+import codigoqr.model.entities.Tblhorario;
+import codigoqr.model.entities.Tblinstitucion;
+import codigoqr.model.entities.Tbljornada;
+import codigoqr.model.entities.Tblparametrosevnt;
+import codigoqr.model.entities.Tbltipoasistente;
+import codigoqr.model.entities.Tbltpevento;
+import codigoqr.model.manager.ManagerQR;
+import codigoqr.view.bean.util.JSFUtil;
+
+@SessionScoped
+@ManagedBean
+public class BeanEvento {
+	// Evento
+	private String nombreEvento;
+	private Integer idUsuario;
+	private Integer tipoEvnt;
+	private Integer idEvnt;
+	private String descripcionEvnt;
+	private String descripcionEvntmostrar;
+	private Date fechaInicioEvnt;
+	private Date fechaFinEvnt;
+	private String direccionEvnt;
+	private List<Tblevento> todosEventos;
+	private List<Tbltpevento> listaTiposEvnts;
+	private Tblevento Evento;
+	// Jornada
+	private Integer idJornada;
+	private Integer idEvento;
+	private String descripcionJornada;
+	private String lugarJornada;
+	private List<Tbljornada> listaJoranasIdEvnt;
+	private List<Tbljornada> listaJoranasIdEvntS;
+	private Date fechaJornada;
+	// horario
+	private String descripcionEntrada;
+	private String descripcionSalida;
+	private Date horaingreso;
+	private Date horafin;
+
+	private List<Tblhorario> listaHoariosIdJornada;
+	// codigoqr
+	private String url;
+	private String token;
+	private boolean bandera;
+	private Integer idHorario;
+	private Integer idHorarioM;
+	// Asistente
+	private Integer idInstitucion;
+	private Integer idTipoasistente;
+	private String cedulaAsistente;
+	private String cedulaAsistenteRegistro;
+	private String nombreAsistente;
+	private String apellidoAsistente;
+	private String celularAsistente;
+	private String correoAsistente;
+	private List<Tbltipoasistente> listaTipoAsistente;
+	private List<Tblinstitucion> listaInstitucion;
+	private String nombreInstitucion;
+	// Asistencia
+	private List<Tblasistencia> listaAsistencia;
+	private List<Tblasistencia> listaAsistenciaM;
+	// Operador
+	private String correoOperador;
+	// bitacora
+	private String evento = "Evento";
+	private String registra = "Registra";
+	// planes
+	private List<Tblparametrosevnt> listaparametros;
+
+	@EJB
+	ManagerQR managerQR;
+
+	@ManagedProperty(value = "#{beanUsuario}")
+	private BeanUsuario beanUsuario;
+
+	@ManagedProperty(value = "#{beanBotones}")
+	private BeanBotones beanBotones;
+
+	@PostConstruct
+	public void iniciar() {
+		todosEventos = managerQR.listaEventosGuardados(beanUsuario.getU().getIdUsuario());
+		listaInstitucion = managerQR.listaInstitucio();
+		listaTipoAsistente = managerQR.listaTpasis();
+		listaTiposEvnts = managerQR.listaTipoEvnt();
+		listaparametros = managerQR.listaParametros();
+	}
+
+	// Eventos
+	public void crearEvento() throws IOException {
+		idUsuario = beanUsuario.getU().getIdUsuario();
+		idEvnt = managerQR.ultimoIdEvento();
+		if (idEvnt != null)
+			idEvnt = idEvnt + 1;
+		else
+			idEvnt = 1;
+		fechaInicioEvnt = new Date();
+		fechaFinEvnt = new Date();
+		tipoEvnt = 2;
+		fechaJornada = new Date();
+		horaingreso = new Date(07);
+		horafin = new Date(12);
+		managerQR.registrarEvento(idUsuario, idEvnt);
+		FacesContext contex = FacesContext.getCurrentInstance();
+		contex.getExternalContext().redirect("crearPremium.xhtml");
+	}
+
+	public void guardarEvento() {
+		try {
+			managerQR.actualizarEvento(tipoEvnt, idEvnt, nombreEvento, descripcionEvnt, fechaInicioEvnt, fechaFinEvnt,
+					direccionEvnt);
+
+			todosEventos = managerQR.listaEventosGuardados(beanUsuario.getU().getIdUsuario());
+			JSFUtil.crearMensajeInfo("Registro Actualizado");
+		} catch (Exception e) {
+			JSFUtil.crearMensajeError(e.getMessage());
+		}
+	}
+
+	public void publicarEvento() {
+		try {
+			managerQR.publicarEvento(tipoEvnt, idEvnt, nombreEvento, descripcionEvnt, fechaInicioEvnt, fechaFinEvnt,
+					direccionEvnt);
+
+			todosEventos = managerQR.listaEventosPublicados(beanUsuario.getU().getIdUsuario());
+			JSFUtil.crearMensajeInfo("Registro Actualizado");
+		} catch (Exception e) {
+			JSFUtil.crearMensajeError(e.getMessage());
+		}
+	}
+	public void eventosPublicados() {
+		todosEventos = managerQR.listaEventosPublicados(beanUsuario.getU().getIdUsuario());
+	}
+	public void eventosGuardados() {
+		todosEventos = managerQR.listaEventosGuardados(beanUsuario.getU().getIdUsuario());
+	}
+	public void eventosTerminados() {
+		todosEventos = managerQR.listaEventosTerminados(beanUsuario.getU().getIdUsuario());
+	}
+	public void cargarEvento(Tblevento evento) throws IOException {
+		nombreEvento=evento.getNombreEvnt();
+		descripcionEvnt=evento.getDescripcionEvnt();
+		listaJoranasIdEvnt = managerQR.listaJornadas(evento.getIdEvnt());
+		FacesContext contex = FacesContext.getCurrentInstance();
+		contex.getExternalContext().redirect("GestionarEvento.xhtml");
+		
+	}
+	
+	// Jornadas
+
+	public void ingresarJornada() {
+		idJornada = managerQR.ultimoIdJornada();
+		if (idJornada != null)
+			idJornada = idJornada + 1;
+		else
+			idJornada = 1;
+		managerQR.regitrarJornada(idJornada, idEvnt, descripcionJornada, fechaJornada, lugarJornada);
+		descripcionEntrada = "Entrada";
+		descripcionSalida = "Salida";
+		managerQR.registrarHorario(idJornada, descripcionEntrada, horaingreso);
+		managerQR.registrarHorario(idJornada, descripcionSalida, horafin);
+		JSFUtil.crearMensajeInfo("Jornada Registrada");
+		listaJoranasIdEvnt = managerQR.listaJornadas(idEvnt);
+	}
+
+	// Asistencia codigoqr
+	public void actionCrearQR(Integer idHorari) throws IOException {
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+				.getRequest();
+		idHorario = idHorari;
+		url = request.getRequestURL().toString();
+		int posicion = url.indexOf("/Administrador/");
+		url = url.substring(0, posicion);
+		url = url + "/ServletQR";
+		token = request.getSession().getId();
+		url = url + "?idevento=" + idHorario;
+		url = url + "&token=" + token;
+		bandera = true;
+		FacesContext contex = FacesContext.getCurrentInstance();
+		contex.getExternalContext().redirect("AsistenciaQR.xhtml");
+	}
+
+	public void actionCrearQRo(Integer idHorari) throws IOException {
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+				.getRequest();
+		idHorario = idHorari;
+		url = request.getRequestURL().toString();
+		int posicion = url.indexOf("/Operador/");
+		url = url.substring(0, posicion);
+		url = url + "/ServletQR";
+		token = request.getSession().getId();
+		url = url + "?idevento=" + idHorario;
+		url = url + "&token=" + token;
+		bandera = true;
+		FacesContext contex = FacesContext.getCurrentInstance();
+		contex.getExternalContext().redirect("AsistenciaQR.xhtml");
+	}
+
+	// Asistencia a mano
+	public void registrarAsistencia() {
+		try {
+			managerQR.registrarAsistencia(cedulaAsistente, idHorarioM);
+			managerQR.registrarBitacora("Asistencia", registra, beanUsuario.getHostname(),
+					beanUsuario.getU().getIdUsuario(), beanUsuario.getIp(), "Registra asistente: " + cedulaAsistente);
+			cedulaAsistente = "";
+		} catch (Exception e) {
+			JSFUtil.crearMensajeError(e.getMessage());
+		}
+	}
+
+	public void registroManual(Integer idHorari) throws IOException {
+		idHorarioM = idHorari;
+		FacesContext contex = FacesContext.getCurrentInstance();
+		contex.getExternalContext().redirect("AsistenciaMano.xhtml");
+	}
+
+	public void registroManual() {
+		try {
+			managerQR.registrarAsistencia(cedulaAsistente, idHorarioM);
+			cedulaAsistente = "";
+		} catch (Exception e) {
+
+			JSFUtil.crearMensajeError(e.getMessage());
+		}
+
+	}
+
+	public void actualizarListaQR() {
+		listaAsistencia = managerQR.findAsistenciaByHorario(idHorario);
+
+	}
+
+	public void actualizarListaM() {
+		listaAsistenciaM = managerQR.findAsistenciaByHorario(idHorarioM);
+
+	}
+
+	// Asistente
+	public void registrarAsistente() {
+		try {
+			managerQR.registrarAsistente(idInstitucion, idTipoasistente, cedulaAsistente, nombreAsistente,
+					apellidoAsistente, celularAsistente, correoAsistente);
+			managerQR.registrarAsistencia(cedulaAsistente, idHorarioM);
+			JSFUtil.crearMensajeInfo("Registrado");
+			idInstitucion = 0;
+			idTipoasistente = 0;
+			cedulaAsistente = "";
+			nombreAsistente = "";
+			apellidoAsistente = "";
+			celularAsistente = "";
+			correoAsistente = "";
+		} catch (Exception e) {
+			JSFUtil.crearMensajeError(e.getMessage());
+		}
+
+	}
+
+	// Operador
+	public void enviarCorreo() throws MessagingException {
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+				.getRequest();
+		String urL = request.getRequestURL().toString();
+		int posicion = urL.indexOf("/Crear/");
+		urL = urL.substring(0, posicion);
+		urL += "/Operar?mail=" + correoOperador + "&idevento=" + idEvnt;
+		managerQR.enviarCorreo(correoOperador, urL);
+		correoOperador = "";
+		JSFUtil.crearMensajeInfo("Solicitud Enviada");
+	}
+
+	public void registrarInstitucion() {
+		managerQR.registrarInstitucion(nombreInstitucion);
+		listaInstitucion = managerQR.listaInstitucio();
+	}
+
+	public List<Tbltpevento> getListaTiposEvnts() {
+		return listaTiposEvnts;
+	}
+
+	public void setListaTiposEvnts(List<Tbltpevento> listaTiposEvnts) {
+		this.listaTiposEvnts = listaTiposEvnts;
+	}
+
+	public Integer getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public String getNombreEvento() {
+		return nombreEvento;
+	}
+
+	public void setNombreEvento(String nombreEvento) {
+		this.nombreEvento = nombreEvento;
+	}
+
+	public Integer getTipoEvnt() {
+		return tipoEvnt;
+	}
+
+	public void setTipoEvnt(Integer tipoEvnt) {
+		this.tipoEvnt = tipoEvnt;
+	}
+
+	public Integer getIdEvnt() {
+		return idEvnt;
+	}
+
+	public void setIdEvnt(Integer idEvnt) {
+		this.idEvnt = idEvnt;
+	}
+
+	public String getDescripcionEvnt() {
+		return descripcionEvnt;
+	}
+
+	public void setDescripcionEvnt(String descripcionEvnt) {
+		this.descripcionEvnt = descripcionEvnt;
+	}
+
+	public Date getFechaInicioEvnt() {
+		return fechaInicioEvnt;
+	}
+
+	public void setFechaInicioEvnt(Date fechaInicioEvnt) {
+		this.fechaInicioEvnt = fechaInicioEvnt;
+	}
+
+	public Date getFechaFinEvnt() {
+		return fechaFinEvnt;
+	}
+
+	public void setFechaFinEvnt(Date fechaFinEvnt) {
+		this.fechaFinEvnt = fechaFinEvnt;
+	}
+
+	public String getDireccionEvnt() {
+		return direccionEvnt;
+	}
+
+	public void setDireccionEvnt(String direccionEvnt) {
+		this.direccionEvnt = direccionEvnt;
+	}
+
+	public List<Tblevento> getTodosEventos() {
+		return todosEventos;
+	}
+
+	public void setTodosEventos(List<Tblevento> todosEventos) {
+		this.todosEventos = todosEventos;
+	}
+	// Jornada
+
+	public String getDescripcionEvntmostrar() {
+		return descripcionEvntmostrar;
+	}
+
+	public void setDescripcionEvntmostrar(String descripcionEvntmostrar) {
+		this.descripcionEvntmostrar = descripcionEvntmostrar;
+	}
+
+	public Integer getIdJornada() {
+		return idJornada;
+	}
+
+	public void setIdJornada(Integer idJornada) {
+		this.idJornada = idJornada;
+	}
+
+	public String getDescripcionJornada() {
+		return descripcionJornada;
+	}
+
+	public void setDescripcionJornada(String descripcionJornada) {
+		this.descripcionJornada = descripcionJornada;
+	}
+
+	public String getLugarJornada() {
+		return lugarJornada;
+	}
+
+	public void setLugarJornada(String lugarJornada) {
+		this.lugarJornada = lugarJornada;
+	}
+
+	public List<Tbljornada> getListaJoranasIdEvnt() {
+		return listaJoranasIdEvnt;
+	}
+
+	public void setListaJoranasIdEvnt(List<Tbljornada> listaJoranasIdEvnt) {
+		this.listaJoranasIdEvnt = listaJoranasIdEvnt;
+	}
+
+	public Integer getIdEvento() {
+		return idEvento;
+	}
+
+	public void setIdEvento(Integer idEvento) {
+		this.idEvento = idEvento;
+	}
+	// Jornada
+
+	public List<Tblhorario> getListaHoariosIdJornada() {
+		return listaHoariosIdJornada;
+	}
+
+	public Date getFechaJornada() {
+		return fechaJornada;
+	}
+
+	public void setFechaJornada(Date fechaJornada) {
+		this.fechaJornada = fechaJornada;
+	}
+
+	public String getDescripcionEntrada() {
+		return descripcionEntrada;
+	}
+
+	public void setDescripcionEntrada(String descripcionEntrada) {
+		this.descripcionEntrada = descripcionEntrada;
+	}
+
+	public String getDescripcionSalida() {
+		return descripcionSalida;
+	}
+
+	public void setDescripcionSalida(String descripcionSalida) {
+		this.descripcionSalida = descripcionSalida;
+	}
+
+	public Date getHoraingreso() {
+		return horaingreso;
+	}
+
+	public void setHoraingreso(Date horaingreso) {
+		this.horaingreso = horaingreso;
+	}
+
+	public Date getHorafin() {
+		return horafin;
+	}
+
+	public void setHorafin(Date horafin) {
+		this.horafin = horafin;
+	}
+
+	public void setListaHoariosIdJornada(List<Tblhorario> listaHoariosIdJornada) {
+		this.listaHoariosIdJornada = listaHoariosIdJornada;
+	}
+
+	public List<Tbljornada> getListaJoranasIdEvntS() {
+		return listaJoranasIdEvntS;
+	}
+
+	public void setListaJoranasIdEvntS(List<Tbljornada> listaJoranasIdEvntS) {
+		this.listaJoranasIdEvntS = listaJoranasIdEvntS;
+	}
+
+	// codigoqr
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public boolean isBandera() {
+		return bandera;
+	}
+
+	public void setBandera(boolean bandera) {
+		this.bandera = bandera;
+	}
+
+	public Integer getIdHorario() {
+		return idHorario;
+	}
+
+	public void setIdHorario(Integer idHorario) {
+		this.idHorario = idHorario;
+	}
+
+	// Asistente
+
+	public Integer getIdInstitucion() {
+		return idInstitucion;
+	}
+
+	public void setIdInstitucion(Integer idInstitucion) {
+		this.idInstitucion = idInstitucion;
+	}
+
+	public Integer getIdTipoasistente() {
+		return idTipoasistente;
+	}
+
+	public void setIdTipoasistente(Integer idTipoasistente) {
+		this.idTipoasistente = idTipoasistente;
+	}
+
+	public String getCedulaAsistente() {
+		return cedulaAsistente;
+	}
+
+	public void setCedulaAsistente(String cedulaAsistente) {
+		this.cedulaAsistente = cedulaAsistente;
+	}
+
+	public String getNombreAsistente() {
+		return nombreAsistente;
+	}
+
+	public void setNombreAsistente(String nombreAsistente) {
+		this.nombreAsistente = nombreAsistente;
+	}
+
+	public String getApellidoAsistente() {
+		return apellidoAsistente;
+	}
+
+	public void setApellidoAsistente(String apellidoAsistente) {
+		this.apellidoAsistente = apellidoAsistente;
+	}
+
+	public String getCelularAsistente() {
+		return celularAsistente;
+	}
+
+	public void setCelularAsistente(String celularAsistente) {
+		this.celularAsistente = celularAsistente;
+	}
+
+	public String getCorreoAsistente() {
+		return correoAsistente;
+	}
+
+	public void setCorreoAsistente(String correoAsistente) {
+		this.correoAsistente = correoAsistente;
+	}
+
+	public List<Tbltipoasistente> getListaTipoAsistente() {
+		return listaTipoAsistente;
+	}
+
+	public void setListaTipoAsistente(List<Tbltipoasistente> listaTipoAsistente) {
+		this.listaTipoAsistente = listaTipoAsistente;
+	}
+
+	public List<Tblinstitucion> getListaInstitucion() {
+		return listaInstitucion;
+	}
+
+	public void setListaInstitucion(List<Tblinstitucion> listaInstitucion) {
+		this.listaInstitucion = listaInstitucion;
+	}
+
+	public String getNombreInstitucion() {
+		return nombreInstitucion;
+	}
+
+	public void setNombreInstitucion(String nombreInstitucion) {
+		this.nombreInstitucion = nombreInstitucion;
+	}
+
+	public String getCedulaAsistenteRegistro() {
+		return cedulaAsistenteRegistro;
+	}
+
+	public void setCedulaAsistenteRegistro(String cedulaAsistenteRegistro) {
+		this.cedulaAsistenteRegistro = cedulaAsistenteRegistro;
+	}
+
+	// Asistencia
+	public List<Tblasistencia> getListaAsistencia() {
+		return listaAsistencia;
+	}
+
+	public void setListaAsistencia(List<Tblasistencia> listaAsistencia) {
+		this.listaAsistencia = listaAsistencia;
+	}
+
+	public Integer getIdHorarioM() {
+		return idHorarioM;
+	}
+
+	public void setIdHorarioM(Integer idHorarioM) {
+		this.idHorarioM = idHorarioM;
+	}
+
+	public List<Tblasistencia> getListaAsistenciaM() {
+		return listaAsistenciaM;
+	}
+
+	public void setListaAsistenciaM(List<Tblasistencia> listaAsistenciaM) {
+		this.listaAsistenciaM = listaAsistenciaM;
+	}
+
+	// login
+	public BeanUsuario getBeanUsuario() {
+		return beanUsuario;
+	}
+
+	public void setBeanUsuario(BeanUsuario beanUsuario) {
+		this.beanUsuario = beanUsuario;
+	}
+
+	public String getCorreoOperador() {
+		return correoOperador;
+	}
+
+	public void setCorreoOperador(String correoOperador) {
+		this.correoOperador = correoOperador;
+	}
+
+	public BeanBotones getBeanBotones() {
+		return beanBotones;
+	}
+
+	public void setBeanBotones(BeanBotones beanBotones) {
+		this.beanBotones = beanBotones;
+	}
+
+	public List<Tblparametrosevnt> getListaparametros() {
+		return listaparametros;
+	}
+
+	public void setListaparametros(List<Tblparametrosevnt> listaparametros) {
+		this.listaparametros = listaparametros;
+	}
+
+}

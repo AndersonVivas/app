@@ -1,0 +1,24 @@
+
+lsquid:S1161(":Add the "@Override" annotation above this method signature(Ïû©ÖûÿÿÿÿHÆ-RMAJORZ
+CODE_SMELL
+usquid:S1854-"CRemove this useless assignment to local variable "idTipoasistente".(’¹ÎðÿÿÿÿÿHÇ-RMAJORZ
+CODE_SMELL
+Ysquid:S1989J"$Add a "try/catch" block for "doGet".(®Ó‘ûÿÿÿÿÿHÈ-RMINORZVULNERABILITY
+Ysquid:S1989J"$Add a "try/catch" block for "doGet".(®Ó‘ûÿÿÿÿÿHÉ-RMINORZVULNERABILITY
+Xsquid:S1148A"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿHÊ-RMINORZVULNERABILITY
+csquid:S1135I"2Complete the task associated to this TODO comment.(» æžÿÿÿÿÿHË-RINFOZ
+CODE_SMELL
+e
+squid:S1065"9Replace this use of System.out or System.err by a logger.(£ìÒÄHÌ-RMAJORZ
+CODE_SMELL
+csquid:S1135 "2Complete the task associated to this TODO comment.(ƒŠ® úÿÿÿÿHÍ-RINFOZ
+CODE_SMELL
+fsquid:S1481-"4Remove this unused "idTipoasistente" local variable.(’¹ÎðÿÿÿÿÿHÎ-RMINORZ
+CODE_SMELL
+csquid:S1135)"2Complete the task associated to this TODO comment.(» æžÿÿÿÿÿHÏ-RINFOZ
+CODE_SMELL
+j
+squid:S106?"9Replace this use of System.out or System.err by a logger.(Ò„¶×øÿÿÿÿHÐ-RMAJORZ
+CODE_SMELL
+gsquid:S1161H":Add the "@Override" annotation above this method signature(‹¨¯¿HÑ-RMAJORZ
+CODE_SMELL

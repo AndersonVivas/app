@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="../Resource/css/style.css"
+		media="screen" />
+
+</h:head>
+<h:body>
+	<b:navBar brand-img="../Resource/css/images/logo.png"
+		brand-img-style-class="brandStyle" id="navbar">
+		<b:navbarLinks id="links">
+			<b:navLink value="Inicio" action="Index" icon="glyphicon-home"
+				href="#" style-class="navlinks"></b:navLink>
+			<b:dropMenu value="Usuarios" icon="glyphicon-user">
+				<b:navLink value="Lista Usuarios" icon="glyphicon-th-list" href="#"></b:navLink>
+				<b:navLink value="Nuevo Usuario" icon="glyphicon-plus-sign"
+					href="NuevoUsuario.xhtml"></b:navLink>
+			</b:dropMenu>
+			<b:navLink value="Actividad Nueva" action="Index"
+				icon="glyphicon-list-alt" href="#"></b:navLink>
+
+			<b:navLink value="Datos Personales" icon="glyphicon-folder-open"
+				href="#"></b:navLink>
+		</b:navbarLinks>
+	</b:navBar>
+	<div>
+		<h:form id="formNuevo">
+
+			<h1>Crear una cuenta</h1>
+			<b:row>
+
+				<b:column col-lg="3">
+					<b:inputText value="#{beanUsuario.nombreUsuario}"
+						placeholder="Nombres" id="nombreUsuario" required="true"
+						required-message="Necesito su nombre"></b:inputText>
+					<b:message for="nombreUsuario"></b:message>
+				</b:column>
+				<b:column col-lg="3">
+					<b:inputText value="#{beanUsuario.apellidoUsuario}"
+						placeholder="Apellidos"></b:inputText>
+				</b:column>
+			</b:row>
+			<b:row>
+			<b:column col-lg="3">
+					<b:inputText value="#{beanUsuario.correoUsuario}"
+						placeholder="Correo Electronico"></b:inputText>
+				</b:column>
+				
+				<b:column col-lg="3">
+					<b:inputText value="#{beanUsuario.celularUsuario}"
+						placeholder="Número de celular"></b:inputText>
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column col-lg="6">
+					<b:inputText type="password" value="#{beanUsuario.claveUsuario}"
+						placeholder="Contraseña nueva" id="clave1"></b:inputText>
+				</b:column>
+			</b:row>
+			<b:row>
+				<b:column col-lg="4">
+					<b:datepicker value="#{beanUsuario.fechaNacimiento_usuario}"
+						placeholder="Fecha de nacimiento"></b:datepicker>
+				</b:column>
+				<b:column col-lg="2">
+					<b:selectOneMenu></b:selectOneMenu>
+				</b:column>
+			</b:row>
+			<b:commandButton actionListener="#{beanUsuario.InsertarOperador()}"
+				look="success" value="Crear" id="bEnviar"></b:commandButton>
+
+		</h:form>
+	</div>
+</h:body>
+</html>

@@ -1,0 +1,4 @@
+function cambiar(){
+	document.getElementById('tablajornada').style.display="none";
+	document.getElementById('jornadasEvento').style.display="block";
+}

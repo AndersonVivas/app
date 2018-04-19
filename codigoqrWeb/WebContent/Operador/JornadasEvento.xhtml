@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<f:metadata>
+	<f:event listener="#{beanUsuario.actionComprobarLogin()}"
+		type="preRenderView"></f:event>
+</f:metadata>
+<h:head>
+	<link rel="stylesheet" type="text/css" href="../Resource/css/style.css"
+		media="screen" />
+		<title>Jornadas</title>
+
+</h:head>
+<h:body>
+	<b:navBar brand-img="../Resource/css/images/logo.png"
+		brand-img-style-class="brandStyle" id="navbar">
+		<b:navbarLinks>
+			<h:form styleClass="navbar-form navbar-right">
+				<b:commandButton action="#{beanUsuario.actionSalir()}" value="Salir"
+					look="link" icon="glyphicon-off"></b:commandButton>
+			</h:form>
+		</b:navbarLinks>
+		<b:navbarLinks id="links">
+			<b:navLink value="Eventos" icon="glyphicon-home" class="active"
+				style-class="navlinks" href="ListaEventos.xhtml"></b:navLink>
+		</b:navbarLinks>
+	</b:navBar>
+	<div>
+		<b:column col-lg="6">
+			<h:form styleClass="formnormal">
+				<h3>Jornadas del Evento</h3>
+				<b:dataTable value="#{beanEvento.listaJoranasIdEvntS}"
+					var="jornadas" searching="false" paginated="false" info="false"
+					border="false" styleClass="tablaEvnt">
+					<b:dataTableColumn>
+						<b:commandButton
+							actionListener="#{beanEvento.verHorarios(jornadas.idJornada)}"
+							update="horariostbl">#{jornadas.descripcionJornada}<br />
+							<h5>Lugar: &nbsp;#{jornadas.lugarJornada}</h5>
+						</b:commandButton>
+					</b:dataTableColumn>
+				</b:dataTable>
+			</h:form>
+		</b:column>
+		<b:column col-lg="6">
+			<h3>Horario de la Jornada</h3>
+			<h:form id="horariostbl" styleClass="formnormal">
+				<b:dataTable value="#{beanEvento.listaHoariosIdJornada}"
+					var="horarios" searching="false" paginated="false" info="false"
+					border="false" styleClass="tablaHorario">
+					<b:dataTableColumn>
+						#{horarios.descripcionHr}<br />
+						<h5>Fecha/Hora: &nbsp;#{horarios.fechaHorario}</h5>
+					</b:dataTableColumn>
+					<b:dataTableColumn>
+						<b:commandButton look="primary" value="Registro por QR"
+							actionListener="#{beanEvento.actionCrearQRo(horarios.idHorario)}">
+						</b:commandButton>
+					</b:dataTableColumn>
+					<b:dataTableColumn>
+						<b:commandButton look="primary" value="Registro manual"
+							actionListener="#{beanEvento.RegistroManual(horarios.idHorario)}">
+						</b:commandButton>
+					</b:dataTableColumn>
+				</b:dataTable>
+			</h:form>
+		</b:column>
+	</div>
+	<b:modal title="Asistencia" styleClass="ClassAsistencia"
+		id="Asistencia">
+		<h:form>
+			<b:column col-lg="6">
+				<b:commandButton></b:commandButton>
+			</b:column>
+			<b:column col-lg="6">
+			</b:column>
+		</h:form>
+	</b:modal>
+</h:body>
+</html>

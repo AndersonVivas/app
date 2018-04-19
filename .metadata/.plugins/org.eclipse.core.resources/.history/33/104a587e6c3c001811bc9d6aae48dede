@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+<h:head>
+	<title>Evento Nuevo</title>
+</h:head>
+<h:body>
+	<ui:composition template="/Resource/Masters/MasterAdmin.xhtml">
+		<ui:define name="principal">
+			<h:form styleClass="formRegistroEvnt" id="formEvento">
+				<b:growl update="auto" id="mensajes"></b:growl>
+				<h1>
+					<label
+						style="background: #566573; width: 4%; color: white; text-align: center;">1</label>Evento
+					nuevo
+				</h1>
+				<div id="detalles Evento">
+					<div id="NombreEvento">
+						<div>
+							<label>Nombre del Evento</label>
+						</div>
+						<div>
+							<b:inputText value="#{beanEvento.nombreEvento}"
+								placeholder="Dale un nombre corto"></b:inputText>
+						</div>
+					</div>
+					<div id="UbicacionEvento">
+						<div>
+							<label>Ubicación</label>
+						</div>
+						<div>
+							<b:inputText value="#{beanEvento.direccionEvnt}" id="ubicacion"
+								placeholder="Busca un lugar o direccón" onFocus="geolocate()"></b:inputText>
+						</div>
+						<script type="text/javascript" src="../Resource/js/mapa.js"></script>
+						<script
+							src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBReOhtkHkZPdOqYIan2P0mQzlGsEBuASw&amp;libraries=places&amp;callback=initAutocomplete"></script>
+
+
+					</div>
+					<div id="fechas">
+						<b:column col-lg="6" display="false">
+							<div id="fechaInicio">
+								<div>
+									<label>Empieza</label>
+								</div>
+								<div>
+									<b:dateTimePicker value="#{beanEvento.fechaInicioEvnt}"
+										placeholder="Fecha y hora inicio" format="YYYY-MM-DD HH:mm"
+										mode="toggle-icon" id="fechainicio"></b:dateTimePicker>
+								</div>
+							</div>
+						</b:column>
+						<b:column col-lg="6">
+							<div id="fechaFin">
+								<div>
+									<label>Finaliza</label>
+								</div>
+								<div>
+									<b:dateTimePicker value="#{beanEvento.fechaFinEvnt}"
+										placeholder="Fecha y hora fin" mode="toggle-icon"
+										id="fechafin"></b:dateTimePicker>
+								</div>
+							</div>
+						</b:column>
+					</div>
+					<div id="descripcionEvento">
+						<div>
+							<label>Descrpción</label>
+						</div>
+						<div>
+							<p:textEditor widgetVar="editor1"
+								value="#{beanEvento.descripcionEvnt}" height="200"
+								style="margin-bottom:10px" />
+						</div>
+					</div>
+					<div id="privacidadEvento">
+						<div>
+							<label>Privacidad del Evento</label>
+							<b:radiobutton value="#{beanEvento.tipoEvnt}">
+								<f:selectItem itemValue="1" itemLabel="Privado">
+								</f:selectItem>
+								<f:selectItem itemValue="2" itemLabel="Publico" />
+							</b:radiobutton>
+						</div>
+						<div></div>
+					</div>
+				</div>
+
+				<div>
+					<h1>
+						<label
+							style="background: #566573; width: 4%; color: white; text-align: center;">2</label>
+						Jornadas Para el Evento
+					</h1>
+					<div>
+						<label>Jornadas del Evento</label>
+					</div>
+
+					<div>
+						<b:button action="#{beanEvento.crearJornada()}"
+							value="Agregar Jornada" onclick="cambiar()" look="link"
+							icon="glyphicon glyphicon-plus"></b:button>
+					</div>
+					<div id="tablajornada" style="display: block">
+						<b:dataTable styleClass="tablaRegistroEvnt" id="tabljor"
+							value="#{beanEvento.listaJoranasIdEvnt}" var="lstj"
+							searching="false" paginated="false" page-length-menu="3"
+							info="false" border="false" page-length="4">
+							<b:dataTableColumn>
+								<label style="font-size: large;">#{lstj.descripcionJornada}</label>
+								<br />
+								<small>#{lstj.lugarJornada}</small>
+
+
+
+							</b:dataTableColumn>
+
+						</b:dataTable>
+					</div>
+					<div id="jornadasEvento" style="display: none">
+						<b:column col-lg="6" display="false">
+							<div>Descripción de Jornada</div>
+							<div>
+								<b:inputText value="#{beanEvento.descripcionJornada}"
+									placeholder="Dale una descripción corta" id="descripcionJorn"></b:inputText>
+							</div>
+						</b:column>
+						<b:column col-lg="6" display="false">
+							<div>Lugar de la Jornada</div>
+							<div>
+								<b:inputText value="#{beanEvento.lugarJornada}"
+									placeholder="Ingresa el Lugar de la Jornada" id="lugarJorn"></b:inputText>
+							</div>
+						</b:column>
+
+						<b:column col-lg="6" display="false">
+							<div>Fecha de Jornada</div>
+							<div>
+								<b:dateTimePicker value="#{beanEvento.fechaJornada}"
+									placeholder="Fecha Jornada" mode="toggle-icon"
+									id="fechajornada" format="MM/DD/YYYY"></b:dateTimePicker>
+							</div>
+						</b:column>
+
+						<b:column col-lg="3" display="false">
+							<div>Hora Entrada</div>
+							<div>
+								<b:dateTimePicker value="#{beanEvento.horaingreso}"
+									mode="toggle-icon" id="fechaEntrada" format="HH:mm"></b:dateTimePicker>
+							</div>
+						</b:column>
+						<b:column col-lg="3" display="false">
+							<div>Hora Fin</div>
+							<div>
+								<b:dateTimePicker value="#{beanEvento.horafin}"
+									mode="toggle-icon" id="fechafinj" format="HH:mm"></b:dateTimePicker>
+							</div>
+						</b:column>
+						<div>
+
+							<p:commandButton value="Guardar" styleClass="buttonregistro"
+								actionListener="#{beanEvento.ingresarJornada()}"
+								onclick="cambiar()" update="@form"></p:commandButton>
+						</div>
+					</div>
+
+				</div>
+				<div>
+					<h1>
+						<label
+							style="background: #566573; width: 4%; color: white; text-align: center;">3</label>Operadores
+					</h1>
+					<div>
+						<b>Si usted desea que alguien más pueda operar este evento,
+							debe enviar una solicitud al correo de la persona que va a
+							cumplir el rol de operador. Recuerde el operador debe aceptar
+							esta solicitud.</b>
+					</div>
+					<b:column col-lg="8">
+						<b:inputText value="#{beanEvento.correoOperador}"
+							placeholder="Correo Operador" id="correo" required="true"
+							required-message="Necesito el correo"></b:inputText>
+						<b:message for="correo"></b:message>
+					</b:column>
+					<b:column col-lg="4">
+						<p:commandButton value="Enviar"
+							actionListener="#{beanEvento.enviarCorreo()}"
+							update="mensajes:,correo"></p:commandButton>
+					</b:column>
+				</div>
+				<b:row></b:row>
+				<div style="align-content: center;">
+					<b:column col-lg="4"></b:column>
+					<h1>¡Muy bien hecho!</h1>
+					<b:row>
+						<b:column col-lg="6">
+							<b:commandButton
+								actionListener="#{beanEvento.actualizarEvento()}"
+								value="Guardar" styleClass="buttonregistro"></b:commandButton>
+						</b:column>
+						<b:column col-lg="2"></b:column>
+						<b:commandButton actionListener="#{beanEvento.actualizarEvento()}"
+							value="Publicar" styleClass="buttonpublicar"></b:commandButton>
+					</b:row>
+				</div>
+			</h:form>
+		</ui:define>
+		<ui:define name="js">
+			<script type="text/javascript" src="../Resource/js/style.js"></script>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

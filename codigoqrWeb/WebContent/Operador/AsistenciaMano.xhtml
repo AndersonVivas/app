@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<f:metadata>
+	<f:event listener="#{beanUsuario.actionComprobarLogin()}"
+		type="preRenderView"></f:event>
+</f:metadata>
+<h:head>
+	<link rel="stylesheet" type="text/css" href="../Resource/css/style.css"
+		media="screen" />
+		<title>Registro Manual</title>
+
+</h:head>
+<h:body>
+	<b:navBar brand-img="../Resource/css/images/logo.png"
+		brand-img-style-class="brandStyle" id="navbar">
+		<b:navbarLinks>
+			<h:form styleClass="navbar-form navbar-right">
+				<b:commandButton action="#{beanUsuario.actionSalir()}" value="Salir"
+					look="link" icon="glyphicon-off"></b:commandButton>
+			</h:form>
+		</b:navbarLinks>
+		<b:navbarLinks id="links">
+			<b:navLink value="Eventos" icon="glyphicon-home" class="active"
+				style-class="navlinks" href="ListaEventos.xhtml"></b:navLink>
+
+		</b:navbarLinks>
+	</b:navBar>
+	<b:column col-lg="6">
+		<div>
+			<b:growl id="growlMsg" globalOnly="true" show-detail="true"
+				show-summary="false" allowDismiss="true" delay="10000" escape="true" />
+			<h:form styleClass="forms" id="formasistencia">
+				<h1>Registrar Asistencia</h1>
+				<b:row>
+					<b:column col-lg="6">
+						<b:inputText value="#{beanEvento.cedulaAsistente}"
+							placeholder="Cedula" id="clave1"></b:inputText>
+					</b:column>
+					<b:column col-lg="6">
+						<b:commandButton actionListener="#{beanEvento.RegistroManual()}"
+							value="Registrar" update="@form,:growlMsg,:formasistente"
+							look="primary"></b:commandButton>
+					</b:column>
+				</b:row>
+			</h:form>
+			<h:form styleClass="forms" id="formasistente">
+				<h1>Ingresar Asistente</h1>
+				<b:row>
+
+					<b:column col-lg="6">
+						<b:inputText value="#{beanEvento.cedulaAsistente}"
+							placeholder="Cedula o Pasaporte" id="cedula" required="true"
+							requiredMessage="Necesito cedula"></b:inputText>
+						<b:message for="cedula"></b:message>
+					</b:column>
+					<b:column col-lg="6">
+						<b:inputText value="#{beanEvento.nombreAsistente}"
+							placeholder="Nombres" id="nombreAsistente" required="true"
+							required-message="Necesito Nombre"></b:inputText>
+						<b:message for="nombreAsistente"></b:message>
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column col-lg="6">
+						<b:inputText value="#{beanEvento.apellidoAsistente}"
+							placeholder="Apellidos" required="true" id="apellidoAsistente"
+							required-message="Necesito Apellido"></b:inputText>
+						<b:message for="apellidoAsistente"></b:message>
+					</b:column>
+
+					<b:column col-lg="6">
+						<b:inputText value="#{beanEvento.celularAsistente}"
+							placeholder="Número de celular" required="true" id="celular"
+							required-message="Necesito Nombre"></b:inputText>
+						<b:message for="celular"></b:message>
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column col-lg="6">
+						<b:inputText value="#{beanEvento.correoAsistente}"
+							placeholder="Correo electrónico" required="true" id="correo"
+							required-message="Necesito Correo"></b:inputText>
+						<b:message for="correo"></b:message>
+
+					</b:column>
+					<b:column col-lg="6">
+						<b:selectOneMenu value="#{beanEvento.idTipoasistente}">
+							<f:selectItems value="#{beanEvento.listaTipoAsistente}"
+								var="ltpa" itemLabel="#{ltpa.asignacionAsistente}"
+								itemValue="#{ltpa.idTipoasistente}"></f:selectItems>
+						</b:selectOneMenu>
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column col-lg="10">
+						<b:selectOneMenu value="#{beanEvento.idInstitucion}" id="selectin">
+							<f:selectItems value="#{beanEvento.listaInstitucion}" var="li"
+								itemLabel="#{li.nombreInstitucion}"
+								itemValue="#{li.idInstitucion}"></f:selectItems>
+						</b:selectOneMenu>
+
+					</b:column>
+					<b:column col-lg="1">
+						<b:button icon="glyphicon-plus" look="info"
+							tooltip="Ingresar nueva institución"
+							onclick="$('.institucionclass').modal()"></b:button>
+					</b:column>
+				</b:row>
+				<b:commandButton actionListener="#{beanEvento.RegistrarAsistente()}"
+					look="success" value="Ingresar" id="bEnviar"
+					update="@form,:growlMsg,:formasistencia"></b:commandButton>
+
+			</h:form>
+		</div>
+	</b:column>
+
+	<b:column col-lg="6">
+		<h1>Registro Asistencia</h1>
+		<h:form id="formLstAsis">
+			<b:poll actionListener="#{beanEvento.ActualizarListaM()}"
+				update="@form" interval="3000"></b:poll>
+			<b:dataTable value="#{beanEvento.listaAsistenciaM}" var="lstAsis"
+				styleClass="tablaHorario" searching="false" paginated="false"
+				info="false" border="false" page-length="5"
+				page-length-menu="5,10,20">
+				<b:dataTableColumn>#{lstAsis.tblasistente.apellidoAsistente}&nbsp;&nbsp;#{lstAsis.tblasistente.nombreAsistente}
+				<h5>cl:&nbsp;&nbsp;#{lstAsis.tblasistente.cedulaAsistente}&nbsp;&nbsp;&nbsp;&nbsp;Lugar
+						de
+						registro:&nbsp;&nbsp;#{lstAsis.tblhorario.tbljornada.lugarJornada}</h5>
+				</b:dataTableColumn>
+			</b:dataTable>
+		</h:form>
+	</b:column>
+
+
+	<b:modal title="institucion" styleClass="institucionclass"
+		id="responsiveModal">
+		<h:form>
+			<b:row>
+				<b:column col-lg="10">
+					<b:inputText value="#{beanEvento.nombreInstitucion}"
+						placeholder="Nombre de la institucion" id="descripcionEvnt"
+						required="true" required-message="Necesito la descripción"></b:inputText>
+					<b:message for="descripcionEvnt"></b:message>
+				</b:column>
+				<b:column col-lg="2">
+					<b:commandButton look="success" value="Agregar"
+						update="growlMsg,:horarios,:formasistente:selectin"
+						actionListener="#{beanEvento.RegistrarInstitucion()}"></b:commandButton>
+				</b:column>
+			</b:row>
+		</h:form>
+		<b:dataTable value="#{beanEvento.listaInstitucion}" var="institucion"
+			id="horarios" styleClass="tablaJornada" searching="false"
+			paginated="false" info="false" border="false">
+			<b:dataTableColumn>
+		#{institucion.nombreInstitucion}
+			</b:dataTableColumn>
+		</b:dataTable>
+		<f:facet name="footer">
+			<b:button value="Terminar" look="primary" dismiss="modal" />
+		</f:facet>
+	</b:modal>
+</h:body>
+</html>

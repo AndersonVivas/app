@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:m="http://code.google.com/p/gmaps4jsf/">
+<h:head>
+	<title>Eventos Creados</title>
+
+</h:head>
+<h:body>
+	<ui:composition template="/Resource/Masters/MasterAdmin.xhtml">
+		<ui:define name="principal">
+			<div id="evntsCreados" style="padding-left: 15%; padding-top: 2%">
+				<h1>Eventos creados</h1>
+				<div>
+					<h:form>
+						<p:commandButton
+							actionListener="#{beanEvento.eventosPublicados()}"
+							value="ACTIVOS" update="tablevnts"></p:commandButton>
+						<p:commandButton actionListener="#{beanEvento.eventosGuardados()}"
+							value="CREADOS" update="tablevnts"></p:commandButton>
+						<p:commandButton
+							actionListener="#{beanEvento.eventosTerminados()}"
+							value="ANTERIORES" update="tablevnts"></p:commandButton>
+					</h:form>
+				</div>
+				<div>
+					<b:dataTable styleClass="tablaRegistroEvnt" id="tablevnts"
+						value="#{beanEvento.todosEventos}" var="lstevn" searching="false"
+						paginated="false" page-length-menu="3" info="false" border="false"
+						page-length="4">
+						<b:dataTableColumn>
+							<label style="font-size: large; color: #566573;">#{lstevn.nombreEvnt}</label>
+							<br />
+							<small style="color: #c0c0c0; font-size: medium;">#{lstevn.fechaInicioEvnt}</small>
+							<br />
+							<b:link value="Gestionar" icon="glyphicon glyphicon-cog"
+								style="font-size: small;"></b:link> &nbsp; &nbsp; &nbsp; 
+							<b:link value="Editar" icon="glyphicon glyphicon-edit"></b:link>
+
+						</b:dataTableColumn>
+					</b:dataTable>
+				</div>
+
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

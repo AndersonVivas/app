@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<f:metadata>
+	<f:event listener="#{beanUsuario.actionComprobarLogin()}"
+		type="preRenderView"></f:event>
+</f:metadata>
+<h:head>
+	<link rel="stylesheet" type="text/css" href="../Resource/css/style.css"
+		media="screen" />
+		<title>RegistroQR</title>
+
+</h:head>
+<h:body>
+	<b:navBar brand-img="../Resource/css/images/logo.png"
+		brand-img-style-class="brandStyle" id="navbar">
+		<b:navbarLinks>
+			<h:form styleClass="navbar-form navbar-right">
+				<b:commandButton action="#{beanUsuario.actionSalir()}" value="Salir"
+					look="link" icon="glyphicon-off"></b:commandButton>
+			</h:form>
+		</b:navbarLinks>
+		<b:navbarLinks id="links">
+			<b:navLink value="Eventos" icon="glyphicon-home" class="active"
+				style-class="navlinks" href="ListaEventos.xhtml"></b:navLink>
+		</b:navbarLinks>
+
+	</b:navBar>
+	<div>
+		<b:column col-lg="6">
+			<h:form styleClass="formnormal">
+				<p:barcode value="#{beanEvento.url}" type="qr"
+					rendered="#{beanEvento.url.length()>0}" width="100%" height="150%"
+					align="center"></p:barcode>
+
+			</h:form>
+		</b:column>
+		<b:column col-lg="6">
+			<h1>Registro Asistencia</h1>
+			<h:form id="formLstAsis">
+				<b:poll actionListener="#{beanEvento.ActualizarListaQR()}"
+					update="@form" interval="3000"></b:poll>
+				<b:dataTable value="#{beanEvento.listaAsistencia}" var="lstAsis"
+					styleClass="tablaHorario" searching="false" paginated="false"
+					info="false" border="false" page-length="5"
+					page-length-menu="5,10,20">
+					<b:dataTableColumn>#{lstAsis.tblasistente.apellidoAsistente}&nbsp;&nbsp;#{lstAsis.tblasistente.nombreAsistente}
+				<h5>cl:&nbsp;&nbsp;#{lstAsis.tblasistente.cedulaAsistente}&nbsp;&nbsp;&nbsp;&nbsp;Lugar
+							de
+							registro:&nbsp;&nbsp;#{lstAsis.tblhorario.tbljornada.lugarJornada}</h5>
+					</b:dataTableColumn>
+				</b:dataTable>
+			</h:form>
+		</b:column>
+	</div>
+</h:body>
+</html>

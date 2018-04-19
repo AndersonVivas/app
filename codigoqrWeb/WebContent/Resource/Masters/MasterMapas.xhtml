@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="../Resource/css/style.css"
+		media="screen" />	
+</h:head>
+<body>
+	<b:navBar brand-img-style-class="brandStyle" position="top" id="navbar">
+		<b:navbarLinks id="links">
+			<b:navbarLinks>
+				<h:form styleClass="navbar-form navbar-right">
+					<b:commandButton action="#{beanUsuario.actionSalir()}"
+						value="#{beanUsuario.u.nombreUsario}" look="link"
+						icon="glyphicon-off"></b:commandButton>
+
+				</h:form>
+			</b:navbarLinks>
+			<b:navLink value="Eventos" action="Index" icon="glyphicon-home"
+				href="ListaEventos.xhtml" style-class="navlinks"></b:navLink>
+			<b:navLink value="Nuevo Evento" action="Index"
+				icon="glyphicon-list-alt" href="AgregarEvento.xhtml"></b:navLink>
+		</b:navbarLinks>
+	</b:navBar>
+
+	<ui:insert name="principal">
+	</ui:insert>
+</body>
+</html>

@@ -1,0 +1,9 @@
+INDEX VERSION 1.4+E:\proyectos\QR1.2\app\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3639371573.index
+3794847590.index
+649527134.index
+1194901812.index
+834977512.index
+1683250187.index
+2746982348.index
+3816932628.index

@@ -1,0 +1,13 @@
+
+squid:S1192‰"XDefine a constant instead of duplicating this literal "Fecha inicio incorrecta" 3 times.(šÛ8Ÿó¨«,H¥BRCRITICALZ
+CODE_SMELL
+jsquid:S001078"<Method has 8 parameters, which is greater than 7 authorized.(Ò»Ø¬Hõ@RMAJORZ
+CODE_SMELL
+ˆsquid:S3776â"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(ùô¢¬şÿÿÿÿHô@RCRITICALZ
+CODE_SMELL
+ssquid:S2147…"ECombine this catch with the one at line 515, which has the same body.(·¡ÌÍHö@RMINORZ
+CODE_SMELL
+squid:S1192Œ"UDefine a constant instead of duplicating this literal "Fecha fin incorrecta" 3 times.(†ÚİÍ8Ÿó¨«,H¤BRCRITICALZ
+CODE_SMELL
+‚squid:S1192Ç"JDefine a constant instead of duplicating this literal "idusuario" 3 times.(ï§¤µ8ÓƒÎ•«,H†CRCRITICALZ
+CODE_SMELL

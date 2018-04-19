@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+<h:head>
+	<title>RegistroQR</title>
+</h:head>
+<h:body>
+	<ui:composition template="/Resource/Masters/MasterAdmin.xhtml">
+		<ui:define name="principal">
+			<div>
+				<b:column col-lg="6">
+					<h:form>
+						<p:barcode value="#{beanEvento.url}" type="qr"
+							rendered="#{beanEvento.url.length()>0}" width="70%" height="100%"
+							align="center"></p:barcode>
+
+					</h:form>
+				</b:column>
+				<b:column col-lg="6">
+					<h1>Registro Asistencia</h1>
+					<h:form id="formLstAsis">
+						<b:poll actionListener="#{beanEvento.actualizarListaQR()}"
+							update="@form" interval="3000"></b:poll>
+						<b:dataTable value="#{beanEvento.listaAsistencia}" var="lstAsis"
+							styleClass="tablaHorario" searching="false" paginated="false"
+							info="false" border="false" page-length="5"
+							page-length-menu="5,10,20">
+							<b:dataTableColumn>#{lstAsis.tblasistente.apellidoAsistente}&nbsp;&nbsp;#{lstAsis.tblasistente.nombreAsistente}
+				<h5>cl:&nbsp;&nbsp;#{lstAsis.tblasistente.cedulaAsistente}&nbsp;&nbsp;&nbsp;&nbsp;Lugar
+									de
+									registro:&nbsp;&nbsp;#{lstAsis.tblhorario.tbljornada.lugarJornada}</h5>
+							</b:dataTableColumn>
+						</b:dataTable>
+					</h:form>
+				</b:column>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

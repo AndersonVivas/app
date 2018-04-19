@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="codigoQRDS" transaction-type="JTA">
+		<jta-data-source>java:/codigoQRDS</jta-data-source>
+		<class>codigoqr.model.entities.Tblasistencia</class>
+		<class>codigoqr.model.entities.Tblasistente</class>
+		<class>codigoqr.model.entities.Tblbitacora</class>
+		<class>codigoqr.model.entities.Tblevento</class>
+		<class>codigoqr.model.entities.Tblhorario</class>
+		<class>codigoqr.model.entities.Tblinstitucion</class>
+		<class>codigoqr.model.entities.Tbljornada</class>
+		<class>codigoqr.model.entities.Tbloperador</class>
+		<class>codigoqr.model.entities.Tblparametrosevnt</class>
+		<class>codigoqr.model.entities.Tblrolusuario</class>
+		<class>codigoqr.model.entities.Tbltipoasistente</class>
+		<class>codigoqr.model.entities.Tbltpevento</class>
+		<class>codigoqr.model.entities.Tblusuario</class>
+		
+	</persistence-unit>
+</persistence>

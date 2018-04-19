@@ -1,0 +1,53 @@
+
+squid:S1192§"IDefine a constant instead of duplicating this literal "eliminar" 3 times.(¡…îûÿÿÿÿH»/RCRITICALZ
+CODE_SMELL
+†squid:S2077å"RUse a variable binding mechanism to construct this query instead of concatenation.(¡ÃĞ¹H¼/RCRITICALZVULNERABILITY
+Ysquid:S1148ê"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿH½/RMINORZVULNERABILITY
+usquid:S00112ª"FDefine and throw a dedicated exception instead of using a generic one.(¤÷²H¾/RMAJORZ
+CODE_SMELL
+‹squid:S2077ÿ"RUse a variable binding mechanism to construct this query instead of concatenation.(ø¬ª¸ÿÿÿÿÿH¿/RCRITICALZVULNERABILITY
+Ysquid:S1148œ"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿHÀ/RMINORZVULNERABILITY
+usquid:S00112™"FDefine and throw a dedicated exception instead of using a generic one.(ÑĞüHÁ/RMAJORZ
+CODE_SMELL
+zsquid:S00112Ş"FDefine and throw a dedicated exception instead of using a generic one.(èİÎÑşÿÿÿÿHÂ/RMAJORZ
+CODE_SMELL
+zsquid:S00112¼"FDefine and throw a dedicated exception instead of using a generic one.(ÿ–‘ÖÿÿÿÿÿHÃ/RMAJORZ
+CODE_SMELL
+e
+squid:S106-"9Replace this use of System.out or System.err by a logger.(ûÑ­HÄ/RMAJORZ
+CODE_SMELL
+ssquid:S00112V"FDefine and throw a dedicated exception instead of using a generic one.(× ŒZHÅ/RMAJORZ
+CODE_SMELL
+„squid:S11927"ODefine a constant instead of duplicating this literal "SELECT o FROM " 4 times.(¦ø×–ıÿÿÿÿHÆ/RCRITICALZ
+CODE_SMELL
+Xsquid:S1148^"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿHÇ/RMINORZVULNERABILITY
+zsquid:S00112"FDefine and throw a dedicated exception instead of using a generic one.(ûÌÛğøÿÿÿÿHÈ/RMAJORZ
+CODE_SMELL
+‹squid:S2077„"RUse a variable binding mechanism to construct this query instead of concatenation.(ˆ²şÿÿÿÿHÉ/RCRITICALZVULNERABILITY
+zsquid:S00112ƒ"FDefine and throw a dedicated exception instead of using a generic one.(”ß„ÁüÿÿÿÿHÊ/RMAJORZ
+CODE_SMELL
+Šsquid:S2077:"RUse a variable binding mechanism to construct this query instead of concatenation.(ˆ²şÿÿÿÿHË/RCRITICALZVULNERABILITY
+zsquid:S00112Ã"FDefine and throw a dedicated exception instead of using a generic one.(¶ëóÀûÿÿÿÿHÌ/RMAJORZ
+CODE_SMELL
+zsquid:S00112ë"FDefine and throw a dedicated exception instead of using a generic one.(»©–©øÿÿÿÿHÍ/RMAJORZ
+CODE_SMELL
+zsquid:S00112’"FDefine and throw a dedicated exception instead of using a generic one.(£ËêéûÿÿÿÿHÎ/RMAJORZ
+CODE_SMELL
+usquid:S00112ù"FDefine and throw a dedicated exception instead of using a generic one.(ø×ûàHÏ/RMAJORZ
+CODE_SMELL
+usquid:S00112“"FDefine and throw a dedicated exception instead of using a generic one.(ª¥»úHĞ/RMAJORZ
+CODE_SMELL
+tsquid:S00112"FDefine and throw a dedicated exception instead of using a generic one.(Àİ—PHÑ/RMAJORZ
+CODE_SMELL
+ysquid:S00112_"FDefine and throw a dedicated exception instead of using a generic one.(û¹êûÿÿÿÿHÒ/RMAJORZ
+CODE_SMELL
+±squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÄßÉñHÓ/RCRITICALZ
+CODE_SMELL
+usquid:S00112²"FDefine and throw a dedicated exception instead of using a generic one.(¨ŠÛÁHÔ/RMAJORZ
+CODE_SMELL
+usquid:S00112¾"FDefine and throw a dedicated exception instead of using a generic one.(¨êHÕ/RMAJORZ
+CODE_SMELL
+‹squid:S2077™"RUse a variable binding mechanism to construct this query instead of concatenation.(ø¬ª¸ÿÿÿÿÿHÖ/RCRITICALZVULNERABILITY
+Ysquid:S1148‚"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿH×/RMINORZVULNERABILITY
+tsquid:S00112Y"FDefine and throw a dedicated exception instead of using a generic one.(»¢‚òHØ/RMAJORZ
+CODE_SMELL

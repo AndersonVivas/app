@@ -1,0 +1,9 @@
+function cambiar(){
+	var tabla=document.getElementById('tablajornada');
+	var jornadas= document.getElementById('jornadasEvento');
+	
+	if (tabla.style.display="none"){
+		jornadas.style.display="none";
+		tabla.style.display="block"
+	}
+}

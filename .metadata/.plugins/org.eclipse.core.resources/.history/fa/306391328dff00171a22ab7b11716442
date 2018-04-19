@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="../Resource/css/style.css"
+		media="screen" />
+
+</h:head>
+<h:body>
+	<b:navBar brand-img="Resource/css/images/logo.png"
+		brand-img-style-class="brandStyle" id="navbar">
+		<b:navbarLinks id="links">
+			<b:navLink value="Inicio" action="Index" icon="glyphicon-home"
+				href="#" style-class="navlinks"></b:navLink>
+			<b:dropMenu value="Usuarios" icon="glyphicon-user">
+				<b:navLink value="Lista Usuarios" icon="glyphicon-th-list" href="#"></b:navLink>
+				<b:navLink value="Nuevo Usuario" icon="glyphicon-plus-sign"
+					href="NuevoUsuario.xhtml"></b:navLink>
+			</b:dropMenu>
+			<b:navLink value="Actividad Nueva" action="Index"
+				icon="glyphicon-list-alt" href="#"></b:navLink>
+
+			<b:navLink value="Datos Personales" icon="glyphicon-folder-open"
+				href="#"></b:navLink>
+		</b:navbarLinks>
+	</b:navBar>
+	<div>
+		<b:column col-lg="6">
+			<h:form>
+				<p:barcode value="#{beanEvento.url}" type="qr"
+					rendered="#{beanEvento.url.length()>0}" width="50%" height="80%"
+					align="center"></p:barcode>
+
+			</h:form>
+		</b:column>
+	</div>
+</h:body>
+</html>

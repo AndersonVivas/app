@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:m="http://code.google.com/p/gmaps4jsf/">
+<h:head>
+	<title>Gestionar Evento</title>
+
+</h:head>
+<h:body>
+	<ui:composition template="/Resource/Masters/MasterAdmin.xhtml">
+		<ui:define name="principal">
+			<div style="padding-left: 20%; padding-right: 10%; padding-top: 5%">
+				<div>
+					<h:outputText value="#{beanEvento.eventoC.nombreEvnt}"
+						style="font-size: xx-large;" />
+				</div>
+				<div>
+					<h:outputText value="Lugar: #{beanEvento.eventoC.direccionEvnt}" />
+				</div>
+				<div>
+					<h:outputText
+						value="Fecha Inicio: #{beanEvento.eventoC.fechaInicioEvnt}" />
+				</div>
+				<div>
+					<h:outputText value="Fecha Fin: #{beanEvento.eventoC.fechaFinEvnt}" />
+				</div>
+				<div>
+					<h:outputText
+						value="Evento #{beanEvento.eventoC.tbltpevento.asignacionTpact}" />
+				</div>
+				<div>
+					<h:form>
+						<b:dataTable id="tabljor" value="#{beanEvento.listaJoranasIdEvnt}"
+							var="lstj" searching="false" paginated="false"
+							page-length-menu="3" info="false" border="false" page-length="4"
+							styleClass="tablaJornadas">
+							<b:dataTableColumn>
+								<label style="font-size: large;">#{lstj.descripcionJornada}</label>
+								<br />
+								<small>#{lstj.lugarJornada}</small>
+								<b:dataTable value="#{beanEvento.mostrarHoraios(lstj)}" var="ls"
+									searching="false" paginated="false" info="false" border="false"
+									page-length="2" styleClass="tblhorarios">
+									<b:dataTableColumn value="">
+										<br />
+										<label style="font-size: large;">#{ls.descripcionHr}</label><br />
+							Hora:#{ls.horaHorario}
+							</b:dataTableColumn>
+									<b:dataTableColumn>
+										<b:commandButton style="font-size: x-small;" look="link"> Tomar asistencia por QR </b:commandButton>
+									</b:dataTableColumn>
+									<b:dataTableColumn>
+										<b:commandButton look="link" style="font-size: x-small;"> Tomar asistencia manualmente </b:commandButton>
+									</b:dataTableColumn>
+								</b:dataTable>
+
+							</b:dataTableColumn>
+
+
+						</b:dataTable>
+					</h:form>
+				</div>
+			</div>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

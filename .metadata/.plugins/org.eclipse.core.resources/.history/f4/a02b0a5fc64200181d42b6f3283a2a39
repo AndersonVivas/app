@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<f:metadata>
+	<f:event listener="#{beanUsuario.actionComprobarLogin()}"
+		type="preRenderView"></f:event>
+</f:metadata>
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="../Resource/css/style.css"
+		media="screen" />
+
+</h:head>
+<h:body>
+	<b:navBar id="navbar" styleClass="navbar">
+		<b:image value="../Resource/css/images/logo.png"
+			styleClass="brandStyle"></b:image>
+		<b:navbarLinks id="links" pull="right">
+			<b:navLink value="Descubrir Eventos" action="Index"
+				href="ListaEventos.xhtml" style-class="navlinks"></b:navLink>
+			<b:dropMenu
+				value="#{beanUsuario.u.nombreUsario}&nbsp;#{beanUsuario.u.apellidoUsuario}"
+				icon="glyphicon glyphicon-user">
+				<b:navLink value="Eventos Creados" href="evntsCreados.xhtml"
+					style-class="navlinks"></b:navLink>
+				<b:navLink value="Eventos Operando" href="#" style-class="navlinks"></b:navLink>
+				<b:navLink></b:navLink>
+				<b:navLink header="Usuario"></b:navLink>
+				<h:form>
+					<b:commandButton look="link" style="padding-left:10%;"
+						value="Salir" action="#{beanUsuario.actionSalir()}"></b:commandButton>
+
+				</h:form>
+			</b:dropMenu>
+			<h:form styleClass="navbar-form navbar-right">
+				<b:commandButton value="CREAR EVENTO"
+					action="#{beanEvento.crearEvento()}" look="link"
+					styleClass="botoncrearevnt" style="color:#22559c;"></b:commandButton>
+			</h:form>
+		</b:navbarLinks>
+	</b:navBar>
+
+
+	<ui:insert name="principal">
+	</ui:insert>
+
+	<ui:insert name="js">
+	</ui:insert>
+</h:body>
+</html>

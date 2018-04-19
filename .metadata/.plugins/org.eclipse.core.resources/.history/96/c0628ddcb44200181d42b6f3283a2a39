@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<f:metadata>
+	<f:event listener="#{beanUsuario.actionComprobarLogin()}"
+		type="preRenderView"></f:event>
+</f:metadata>
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="../Resource/css/style.css"
+		media="screen" />
+
+</h:head>
+<h:body>
+	<h:form>
+		<b:navBar brand-img-style-class="brandStyle" id="navbar">
+			<b:navbarLinks id="links">
+				<b:navbarLinks>
+					<b:commandButton action="#{beanUsuario.actionSalir()}"
+						value="#{beanUsuario.u.nombreUsario}" look="link"
+						icon="glyphicon-off"></b:commandButton>
+				</b:navbarLinks>
+				<b:navLink value="Eventos" action="Index" icon="glyphicon-home"
+					href="ListaEventos.xhtml" style-class="navlinks"></b:navLink>
+			</b:navbarLinks>
+
+			<b:commandButton value="Nuevo Evento"
+				action="#{beanEvento.crearEvento()}"></b:commandButton>
+
+		</b:navBar>
+	</h:form>
+	<ui:insert name="principal">
+	</ui:insert>
+
+	<ui:insert name="js">
+	</ui:insert>
+</h:body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<f:metadata>
+	<f:event listener="#{beanUsuario.actionComprobarLogin()}"
+		type="preRenderView"></f:event>
+</f:metadata>
+<h:head>
+	<link rel="stylesheet" type="text/css" href="../Resource/css/style.css"
+		media="screen" />
+		<title >Registro Rapido</title>
+
+</h:head>
+<h:body>
+	<b:navBar brand-img="../Resource/css/images/logo.png"
+		brand-img-style-class="brandStyle" id="navbar">
+		<b:navbarLinks>
+			<h:form styleClass="navbar-form navbar-right">
+				<b:commandButton action="#{beanUsuario.actionSalir()}" value="Salir"
+					look="link" icon="glyphicon-off"></b:commandButton>
+			</h:form>
+		</b:navbarLinks>
+		<b:navbarLinks id="links">
+			<b:navLink value="Eventos" action="Index" icon="glyphicon-home"
+				class="active" style-class="navlinks"></b:navLink>
+		</b:navbarLinks>
+
+
+	</b:navBar>
+	<div>
+		<h:form styleClass="formnormal">
+			<h1>Eventos</h1>
+			<b:dataTable value="#{beanEvento.todosEventos}" var="eventos"
+				styleClass="tablaEvnt" searching="false" paginated="false"
+				info="false" border="false">
+
+				<b:dataTableColumn order-by="#{eventos.idEvnt}">
+					<b:commandButton
+						action="#{beanEvento.verListaJornadas(eventos.idEvnt)}">#{eventos.descripcionEvnt}<br />
+						<h5>
+							Dirección:&nbsp;#{eventos.direccionEvnt}&nbsp;&nbsp;&nbsp; Fecha
+							inicio:&nbsp;#{eventos.fechaInicioEvnt}&nbsp;&nbsp;&nbsp;Fecha
+							Fin:&nbsp;#{eventos.fechaFinEvnt}</h5>
+					</b:commandButton>
+				</b:dataTableColumn>
+			</b:dataTable>
+		</h:form>
+	</div>
+</h:body>
+</html>

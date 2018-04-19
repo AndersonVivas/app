@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+<h:head>
+	<title>Registro Rapido</title>
+</h:head>
+<h:body>
+	<ui:composition template="/Resource/Masters/MasterAdmin.xhtml">
+		<ui:define name="principal">
+			<div>
+				<h:form styleClass="formnormal">
+
+					<p:fieldset id="availableCarsField" styleClass="tablaevnt">
+						<p:dataGrid value="#{beanEvento.todosEventos}" var="eventos"
+							columns="3" layout="grid" paginator="false" id="cars"
+							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							info="false" widgetVar="EventosTable"
+							filteredValue="#{eventos.descripcionEvnt}">
+
+							<p:panel header="#{eventos.descripcionEvnt}"
+								style="text-align:center">
+								<h:panelGrid columns="1" style="width:100%">
+									<p:graphicImage url="../Resource/css/images/eventos.png"
+										width="50" />
+									<h:outputText value="Dirección: #{eventos.direccionEvnt}" />
+									<h:outputText value="Fecha inicio:#{eventos.fechaInicioEvnt}" />
+									<h:outputText value="Fecha fin:#{eventos.fechaFinEvnt}" />
+									<b:commandButton
+										action="#{beanEvento.verListaJornadas(eventos.idEvnt)}"
+										value="Tomar asistencia" />
+									<b:commandButton action="#{beanEvento.cargarEvento(eventos)}"
+										value="Editar" />
+									<b:dropButton value="Configuracion">
+										<b:navLink value="Editar" href="#"></b:navLink>
+
+									</b:dropButton>
+								</h:panelGrid>
+
+							</p:panel>
+						</p:dataGrid>
+					</p:fieldset>
+				</h:form>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
